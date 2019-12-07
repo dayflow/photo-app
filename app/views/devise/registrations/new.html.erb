@@ -1,6 +1,12 @@
-<script language="Javascript">
-  Stripe.setPublishableKey("<%= Rails.configuration.stripe[:publishable_key] %>");
-</script>
+<% if Rails.env == "production" %>
+  <script language="Javascript">
+    Stripe.setPublishableKey("<%= ENV['STRIPE_TEST_PUBLISHABLE_KEY'] %>");
+  </script>
+<% else %>
+  <script language="Javascript">
+    Stripe.setPublishableKey("<%= Rails.configuration.stripe[:publishable_key] %>");
+  </script>
+<% end %>
 
 <%= bootstrap_devise_error_messages! %>
 
